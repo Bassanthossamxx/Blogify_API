@@ -64,6 +64,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'blogify.urls'
+AUTH_USER_MODEL = 'blog.CustomUser'
 
 TEMPLATES = [
     {

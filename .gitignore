@@ -2,8 +2,9 @@
 __pycache__/
 *.py[cod]
 *$py.class
-# folders
+# folders , files
 .idea
+material.md
 # C extensions
 *.so
 
