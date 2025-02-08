@@ -7,7 +7,7 @@ from .models import CustomUser
 from .serializer import UserSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 
-#Authnetication endpoints
+#User endpoints:
 class AuthViewSet(ViewSet):
 
    # Registration endpoint

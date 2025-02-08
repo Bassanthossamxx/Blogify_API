@@ -2,10 +2,13 @@ from pathlib import Path
 from datetime import timedelta
 from decouple import config
 
+
+
+#donenv settings
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
-BASE_DIR = Path(__file__).resolve().parent.parent
 
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -30,13 +33,19 @@ INSTALLED_APPS = [
     'django_filters',
     'corsheaders',
     'blog',
-
+    # 'django.contrib.sites',  # Required for allauth
+    # 'allauth',
+    # 'allauth.account',
+    # 'allauth.socialaccount',
+    # 'allauth.socialaccount.providers.facebook',  # Facebook provider
 ]
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',  # For JWT tokens
+        # 'rest_framework.authentication.SessionAuthentication',  # For Django sessions (e.g., allauth)
     ],
 }
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
