@@ -21,7 +21,6 @@ class AuthViewSet(ViewSet):
              {'message': 'Account created successfully!',},status=status.HTTP_201_CREATED)
      return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
     # Login endpoint
    @action(detail=False, methods=['post'])
    def login(self, request):
