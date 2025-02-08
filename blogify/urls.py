@@ -3,10 +3,10 @@ from django.contrib import admin
 from django.urls import path , include
 from rest_framework.routers import DefaultRouter
 
-from blog.views import AuthViewSet
+from blog.views import UserAuthViewSet
 
 routers = DefaultRouter()
-routers.register('auth', AuthViewSet, basename='auth')
+routers.register('auth', UserAuthViewSet, basename='auth')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
