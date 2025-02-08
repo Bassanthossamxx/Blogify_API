@@ -1,10 +1,22 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from .validators import egyptian_phone_validator
 
+#User :
 class CustomUser(AbstractUser):
-    phone = models.CharField(max_length=15, blank=True, null=True)
+    email = models.EmailField(unique=True, null=False, blank=False)
+    first_name = models.CharField(max_length=150, null=False, blank=False)
+    last_name = models.CharField(max_length=150, null=False, blank=False)
+    phone = models.CharField(
+        max_length=11,
+        validators=[egyptian_phone_validator],
+        # unique=True,
+        null=False,
+        blank=False,)
+
     def __str__(self):
         return self.username
+
 
 
 class Post(models.Model):

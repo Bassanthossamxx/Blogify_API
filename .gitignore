@@ -5,6 +5,7 @@ __pycache__/
 # folders , files
 .idea
 material.md
+note.txt
 # C extensions
 *.so
 
