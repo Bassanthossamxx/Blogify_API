@@ -10,7 +10,7 @@ class CustomUser(AbstractUser):
     phone = models.CharField(
         max_length=11,
         validators=[egyptian_phone_validator],
-        # unique=True, will try it
+        unique=True,
         null=False,
         blank=False,)
     def __str__(self):

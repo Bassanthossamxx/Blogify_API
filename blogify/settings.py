@@ -33,11 +33,9 @@ INSTALLED_APPS = [
     'django_filters',
     'corsheaders',
     'blog',
-    # 'django.contrib.sites',  # Required for allauth
-    # 'allauth',
-    # 'allauth.account',
-    # 'allauth.socialaccount',
-    # 'allauth.socialaccount.providers.facebook',  # Facebook provider
+    'social_django',
+    'rest_framework_simplejwt.token_blacklist',  # For JWT blacklist
+
 ]
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -53,9 +51,20 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+#Google Auth using python social auth
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '755759289945-hqvjpnrllc94ido47b5sach35ca6nm3o.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI = 'http://localhost:8000/auth/complete/google-oauth2/'
+LOGIN_REDIRECT_URL = '/' #where to back after login with google
+
 
 ROOT_URLCONF = 'blogify.urls'
 #Add the customize User model
