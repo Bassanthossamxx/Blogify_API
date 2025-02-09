@@ -1,22 +1,20 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate , get_user_model
 from .models import CustomUser
 from .serializer import UserSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from social_django.utils import load_backend, load_strategy
 from social_core.exceptions import AuthException
 from django.conf import settings
-
+User = get_user_model()
 # Registration view
 class RegisterView(APIView):
     def post(self, request):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
-            user = serializer.save()
-            user.set_password(serializer.validated_data['password'])  # Hash the password
-            user.save()  # Save after hashing password
+            user = User.objects.create_user(**serializer.validated_data)
             return Response(
                 {'message': 'Account created successfully!'},
                 status=status.HTTP_201_CREATED
