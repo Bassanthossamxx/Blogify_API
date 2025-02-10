@@ -9,6 +9,7 @@ from social_django.utils import load_backend, load_strategy
 from social_core.exceptions import AuthException
 from django.conf import settings
 User = get_user_model()
+
 # Registration view
 class RegisterView(APIView):
     def post(self, request):
