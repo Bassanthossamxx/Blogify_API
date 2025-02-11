@@ -6,6 +6,7 @@ __pycache__/
 .idea
 material.md
 note.md
+
 # C extensions
 *.so
 
