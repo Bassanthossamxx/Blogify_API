@@ -3,17 +3,19 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth import authenticate , get_user_model
 from .models import CustomUser
-from .serializer import UserSerializer
+from .serializer import RegisterSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from social_django.utils import load_backend, load_strategy
 from social_core.exceptions import AuthException
 from django.conf import settings
+
+# get user model :
 User = get_user_model()
 
 # Registration view
-class RegisterView(APIView):
+class SignUpView(APIView):
     def post(self, request):
-        serializer = UserSerializer(data=request.data)
+        serializer = RegisterSerializer(data=request.data)
         if serializer.is_valid():
             user = User.objects.create_user(**serializer.validated_data)
             return Response(
@@ -25,18 +27,17 @@ class RegisterView(APIView):
 # Login view
 class LoginView(APIView):
     def post(self, request):
-        username = request.data.get('username')
+        email = request.data.get('email')
         password = request.data.get('password')
-        user = authenticate(username=username, password=password)
+        user = authenticate(email=email, password=password)
         if user:
-            # Generate refresh token
             refresh = RefreshToken.for_user(user)
             return Response({
                 'message': 'Login successful!',
                 'access': str(refresh.access_token),
                 'refresh': str(refresh),
             }, status=status.HTTP_200_OK)
-        return Response({'error': 'Invalid username or password'}, status=status.HTTP_401_UNAUTHORIZED)
+        return Response({'error': 'Invalid email or password'}, status=status.HTTP_401_UNAUTHORIZED)
 
 # Google login view
 class GoogleLoginView(APIView):

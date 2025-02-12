@@ -8,7 +8,7 @@ class CustomUser(AbstractUser):
     first_name = models.CharField(max_length=50, null=False, blank=False)
     last_name = models.CharField(max_length=50, null=False, blank=False)
     phone = models.CharField(
-        max_length=11,
+        max_length=13,
         validators=[egyptian_phone_validator],
         unique=True,
         null=False,
