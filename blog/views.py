@@ -24,12 +24,12 @@ class SignUpView(APIView):
             )
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-# Login view
+# Login View :
 class LoginView(APIView):
     def post(self, request):
         email = request.data.get('email')
         password = request.data.get('password')
-        user = authenticate(email=email, password=password)
+        user = authenticate(request, username=email, password=password)
         if user:
             refresh = RefreshToken.for_user(user)
             return Response({
@@ -38,6 +38,7 @@ class LoginView(APIView):
                 'refresh': str(refresh),
             }, status=status.HTTP_200_OK)
         return Response({'error': 'Invalid email or password'}, status=status.HTTP_401_UNAUTHORIZED)
+
 
 # Google login view
 class GoogleLoginView(APIView):

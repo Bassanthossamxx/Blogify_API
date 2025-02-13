@@ -4,9 +4,7 @@ from .validators import egyptian_phone_validator
 
 #User :
 class CustomUser(AbstractUser):
-    email = models.EmailField(unique=True, null=False, blank=False)
-    first_name = models.CharField(max_length=50, null=False, blank=False)
-    last_name = models.CharField(max_length=50, null=False, blank=False)
+    email = models.EmailField(unique=True)
     phone = models.CharField(
         max_length=13,
         validators=[egyptian_phone_validator],
@@ -15,6 +13,8 @@ class CustomUser(AbstractUser):
         blank=False,)
     def __str__(self):
         return self.username
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['phone' , 'first_name','last_name','username']
 
 
 
