@@ -7,6 +7,6 @@ path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
 path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 path('register/', RegisterView.as_view(), name='register'),
 path('login/', LoginView.as_view(), name='login'),
-path('auth/', include('social_django.urls', namespace='social')),
+path('social/', include('social_django.urls', namespace='social')),
 ]
-#google endpoint : http://localhost:8000/auth/login/google-oauth2/
+#google endpoint : http://localhost:8000/auth/social/login/google-oauth2/

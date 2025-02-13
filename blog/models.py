@@ -3,18 +3,21 @@ from django.contrib.auth.models import AbstractUser
 from .validators import egyptian_phone_validator
 
 #User :
+#Customize User :
 class CustomUser(AbstractUser):
-    email = models.EmailField(unique=True, null=False, blank=False)
-    first_name = models.CharField(max_length=50, null=False, blank=False)
-    last_name = models.CharField(max_length=50, null=False, blank=False)
-    phone = models.CharField(
-        max_length=11,
-        validators=[egyptian_phone_validator],
-        unique=True,
-        null=False,
-        blank=False,)
+    email = models.EmailField(unique=True)
+    first_name = models.CharField(max_length=65,blank=False , null=False)
+    last_name = models.CharField(max_length=65,blank=False , null=False)
+    phone = (models.CharField
+             (max_length=11,
+              validators=[egyptian_phone_validator],
+              blank=False,
+              null=True,
+              unique=True))
     def __str__(self):
         return self.username
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['phone' , 'first_name','last_name','username']
 
 
 

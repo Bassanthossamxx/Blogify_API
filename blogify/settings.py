@@ -11,12 +11,6 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-z6sb5-5fed(g3oans951-p2jo3)rf6cs!#9^s@&^p7$@oo74m%'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
 ALLOWED_HOSTS = []
 
 
@@ -62,9 +56,12 @@ AUTHENTICATION_BACKENDS = (
 #Google Auth using python social auth
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '755759289945-hqvjpnrllc94ido47b5sach35ca6nm3o.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
-SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI = 'http://localhost:8000/auth/complete/google-oauth2/'
-LOGIN_REDIRECT_URL = '/' #where to back after login with google
-
+SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI = 'http://localhost:8000/social/complete/google-oauth2/'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
+    'https://www.googleapis.com/auth/userinfo.email',
+    'https://www.googleapis.com/auth/userinfo.profile',
+    'openid',
+]
 
 ROOT_URLCONF = 'blogify.urls'
 #Add the customize User model
