@@ -54,9 +54,9 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 #Google Auth using python social auth
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '755759289945-hqvjpnrllc94ido47b5sach35ca6nm3o.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
-SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI = 'http://localhost:8000/social/complete/google-oauth2/'
+# SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '755759289945-hqvjpnrllc94ido47b5sach35ca6nm3o.apps.googleusercontent.com'
+# SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+# SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI = 'http://localhost:8000/social/complete/google-oauth2/'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
     'https://www.googleapis.com/auth/userinfo.email',
     'https://www.googleapis.com/auth/userinfo.profile',
