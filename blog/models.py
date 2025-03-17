@@ -20,7 +20,7 @@ class CustomUser(AbstractUser):
     REQUIRED_FIELDS = ['phone' , 'first_name','last_name','username']
 
 
-
+# Posts table
 class Post(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
@@ -31,9 +31,8 @@ class Post(models.Model):
         return self.title
 
 
-
+# Comments table
 class Comments(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
     author = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
