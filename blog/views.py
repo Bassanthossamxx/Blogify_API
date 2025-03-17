@@ -1,9 +1,9 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status , viewsets
 from django.contrib.auth import authenticate , get_user_model
-from .models import CustomUser
-from .serializer import UserSerializer
+from .models import CustomUser , Post
+from .serializer import UserSerializer, PostSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from social_django.utils import load_backend, load_strategy
 from social_core.exceptions import AuthException
@@ -44,6 +44,7 @@ class LoginView(APIView):
 
 #Logout View
 class LogoutView(APIView):
+    #JWT tokens logout view
     def post(self, request):
         refresh = request.data.get('refresh')
         if not refresh:
@@ -87,3 +88,7 @@ class GoogleCallbackView(APIView):
             }, status=status.HTTP_200_OK)
 
         return Response({'error': 'Authentication failed'}, status=status.HTTP_400_BAD_REQUEST)
+
+class PostsViewSet(viewsets.ModelViewSet):
+    serializer_class = PostSerializer
+    queryset = Post.objects.all()
