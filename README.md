@@ -49,7 +49,6 @@ A robust blogging platform REST API built with Django Rest Framework and JWT aut
    SECRET_KEY=your_secret_key
    SOCIAL_AUTH_GOOGLE_OAUTH2_KEY=your_google_oauth_key
    SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET=your_google_oauth_secret
-   SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI=your_redirect_uri
    ```
 
 5. Run migrations:
