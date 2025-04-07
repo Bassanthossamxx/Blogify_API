@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from .validators import egyptian_phone_validator
+from django.utils.text import slugify
 
 #User :
 #Customize User :
@@ -27,12 +28,21 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now = True)
     author = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    slug = models.SlugField(unique=True , blank=True)
+    class Meta:
+        ordering = ['-created_at' , '-updated_at']
     def __str__(self):
         return self.title
+    def save(self, *args, **kwargs):
+        if not self.slug or self.slug != slugify(self.title):
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
 
 
 # Comments table
-class Comments(models.Model):
+class Comment(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now = True)
     author = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')

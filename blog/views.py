@@ -2,12 +2,13 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status , viewsets
 from django.contrib.auth import authenticate , get_user_model
-from .models import CustomUser , Post
-from .serializer import UserSerializer, PostSerializer
+from .models import CustomUser , Post , Comment
+from .serializer import UserSerializer, PostSerializer , CommentSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from social_django.utils import load_backend, load_strategy
 from social_core.exceptions import AuthException
 from django.conf import settings
+from .permissions import IsAuthorOrReadOnly
 User = get_user_model()
 
 # Registration view
@@ -92,3 +93,10 @@ class GoogleCallbackView(APIView):
 class PostsViewSet(viewsets.ModelViewSet):
     serializer_class = PostSerializer
     queryset = Post.objects.all()
+    lookup_field = 'slug'
+    permission_classes = [IsAuthorOrReadOnly]
+
+class CommentsViewSet(viewsets.ModelViewSet):
+    serializer_class = CommentSerializer
+    queryset = Comment.objects.all()
+    permission_classes = [IsAuthorOrReadOnly]
