@@ -2,9 +2,7 @@ from pathlib import Path
 from datetime import timedelta
 from decouple import config
 import os
-from dotenv import load_dotenv
 from urllib.parse import urlparse
-load_dotenv()
 
 
 
@@ -12,9 +10,8 @@ load_dotenv()
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 BASE_DIR = Path(__file__).resolve().parent.parent
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='*').split(',')
 
-
-ALLOWED_HOSTS = []
 
 
 # Application definition
