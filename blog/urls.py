@@ -1,6 +1,6 @@
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from django.urls import path , include
-from .views import RegisterView, LoginView , GoogleLoginView, GoogleCallbackView , LogoutView , PostsViewSet , CommentsViewSet
+from .views import RegisterView, LoginView , GoogleLoginView, GoogleCallbackView , LogoutView , PostsViewSet , CommentsViewSet , UserProfileView
 from rest_framework.routers import DefaultRouter
 route = DefaultRouter()
 route.register(r'post', PostsViewSet , basename="post")
@@ -11,6 +11,7 @@ path('auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 path('auth/register/', RegisterView.as_view(), name='register'),
 path('auth/login/', LoginView.as_view(), name='login'),
 path('auth/logout/', LogoutView.as_view(), name='logout'),
+path('auth/profile/', UserProfileView.as_view(), name='user-profile'),
 # path('auth/social/', include('social_django.urls', namespace='social')),
     path('api/', include(route.urls)),
 

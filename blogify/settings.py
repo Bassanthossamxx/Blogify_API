@@ -110,18 +110,24 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'blogify.wsgi.application'
+# Add these at the top of your settings.py
+import os
+from dotenv import load_dotenv
+from urllib.parse import urlparse
 
+load_dotenv()
 
+# Replace the DATABASES section of your settings.py with this
 tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
-
 db_path = tmpPostgres.path
 if isinstance(db_path, bytes):
     db_path = db_path.decode()
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': db_path.replace('/', ''),
+        'NAME': tmpPostgres.path.replace('/', ''),
         'USER': tmpPostgres.username,
         'PASSWORD': tmpPostgres.password,
         'HOST': tmpPostgres.hostname,

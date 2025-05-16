@@ -9,7 +9,15 @@ from social_django.utils import load_backend, load_strategy
 from social_core.exceptions import AuthException
 from django.conf import settings
 from .permissions import IsAuthorOrReadOnly
+from rest_framework.permissions import IsAuthenticated
 User = get_user_model()
+
+#User Profile View
+class UserProfileView(APIView):
+    permission_classes = [IsAuthenticated]
+    def get(self, request):
+        serializer = UserSerializer(request.user)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 # Registration view
 class RegisterView(APIView):
